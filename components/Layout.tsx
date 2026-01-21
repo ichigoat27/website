@@ -18,8 +18,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         >
           <div className="w-8 h-8 bg-zinc-900 rounded-lg border border-white/10 flex items-center justify-center">
             <img
-              src="/ichi.png"
-              className="w-4 h-4 object-cover opacity-100"
+              src="/icons/ichi.png"
+              className="w-7 h-7 object-cover opacity-100"
             />
           </div>
           Ichigoat
