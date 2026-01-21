@@ -36,7 +36,7 @@ export const Home: React.FC = () => {
       <section className="max-w-4xl mx-auto w-full pt-32">
         <div className="flex items-center gap-3 mb-8">
           <div className="p-3 bg-zinc-900/60 rounded-xl border border-white/10">
-            <img src="/icons/ura.png" className="w-6 h-6 animate-spin-slow" />
+            <img src="/icons/ura.png" className="w-8 h-8 animate-spin-slow" />
           </div>
           <div>
             <h2 className="text-4xl font-bold">Urahara</h2>
@@ -177,7 +177,7 @@ const ChatInterface = () => {
             <div className="w-10 h-10 rounded-xl bg-zinc-900 flex items-center justify-center">
               <img
                 src={x.role === 'model' ? '/icons/ura.png' : '/icons/icon.png'}
-                className="w-7 h-7 rounded-md"
+                className="w-10 h-10 rounded-md"
               />
             </div>
             <div className="max-w-[85%] p-4 rounded-2xl bg-zinc-900/70">
