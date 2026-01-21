@@ -18,8 +18,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         >
           <div className="w-8 h-8 bg-zinc-900 rounded-lg border border-white/10 flex items-center justify-center">
             <img
-              src="https://i.pinimg.com/736x/78/61/da/7861da21e8bd99f262e31fd9b65287b7.jpg"
-              className="w-4 h-4 object-cover opacity-80"
+              src="/ichi.png"
+              className="w-4 h-4 object-cover opacity-100"
             />
           </div>
           Ichigoat
@@ -38,8 +38,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 opacity-40 text-zinc-300">
           <div className="font-heading font-bold tracking-tighter flex items-center gap-2">
             <img
-              src="/icons/zap.jpg"
-              className="w-4 h-4 object-cover opacity-70"
+              src="/icons/icon.png"
+              className="w-4 h-4 object-cover opacity-100"
             />
             this was made possible by nathan 🙏
           </div>
