@@ -18,7 +18,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         >
           <div className="w-8 h-8 bg-zinc-900 rounded-lg border border-white/10 flex items-center justify-center">
             <img
-              src="/icons/ghost.jpg"
+              src="https://i.pinimg.com/736x/78/61/da/7861da21e8bd99f262e31fd9b65287b7.jpg"
               className="w-4 h-4 object-cover opacity-80"
             />
           </div>
