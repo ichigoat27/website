@@ -1,240 +1,225 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Message } from '../types';
-import { Send, Fan, Copy, Check } from 'lucide-react';
-import { GoogleGenAI, Chat } from "@google/genai";
+import React, { useEffect, useRef, useState } from 'react'
+import { Message } from '../types'
+import { Send, Copy, Check } from 'lucide-react'
+import { GoogleGenAI, Chat } from '@google/genai'
 
 export const Home: React.FC = () => {
   const scrollImages = [
-    'https://i.redd.it/manga-volume-covers-v0-p4pvga7sqeza1.jpg?width=6376&format=pjpg&auto=webp&s=580d6104f600038a23fc1ff7ac6314b9d2bdac53',
-    'https://www.dexerto.com/cdn-image/wp-content/uploads/2024/12/30/bleach-tybw-cover.jpg?width=1200&quality=60&format=auto',
-    'https://fictionhorizon.com/wp-content/uploads/2023/03/IchigoMerged.jpg',
-    'https://wallpapers-clan.com/wp-content/uploads/2024/02/bleach-ichigo-kurosaki-blue-desktop-wallpaper-cover.jpg'
-  ];
+    'https://picsum.photos/seed/one/1200/800?grayscale',
+    'https://picsum.photos/seed/two/1200/800?grayscale',
+    'https://picsum.photos/seed/three/1200/800?grayscale',
+    'https://picsum.photos/seed/four/1200/800?grayscale'
+  ]
 
   return (
-    <div className="px-6 space-y-32 pb-32 overflow-x-hidden">
+    <div className="px-6 space-y-32 pb-32 overflow-x-hidden bg-gradient-to-br from-black via-zinc-900 to-neutral-800 text-zinc-200">
       <section className="h-[80vh] flex flex-col justify-center items-center text-center max-w-5xl mx-auto">
-        <h1 className="text-6xl md:text-8xl font-heading font-extrabold tracking-tighter leading-none mb-8 animate-in slide-in-from-bottom duration-1000">
-          TEST PHASE <br /> 
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">TEST PHASE</span>
+        <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter leading-none mb-8">
+          spirit <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-500">
+            particles
+          </span>
         </h1>
-        <p className="text-cyan-100/50 max-w-md animate-in fade-in duration-1000 delay-300 tracking-wide">
-          "Welcome to the whatever this is."
+        <p className="text-zinc-400 max-w-md">
+          welcome to the seireitei database authorized personnel only
         </p>
       </section>
 
       <section className="space-y-64">
-        {scrollImages.map((src, idx) => (
-          <div key={idx} className="relative min-h-[60vh] flex items-center justify-center">
-            <VibeImage src={src} direction={idx % 2 === 0 ? 'left' : 'right'} />
+        {scrollImages.map((src, i) => (
+          <div key={i} className="relative min-h-[60vh] flex items-center justify-center">
+            <VibeImage src={src} direction={i % 2 === 0 ? 'left' : 'right'} />
           </div>
         ))}
       </section>
 
       <section className="max-w-4xl mx-auto w-full pt-32">
         <div className="flex items-center gap-3 mb-8">
-          <div className="p-3 bg-cyan-950/30 rounded-xl border border-cyan-500/20">
-            <Fan className="text-cyan-400 animate-spin-slow" size={24} />
+          <div className="p-3 bg-zinc-900/60 rounded-xl border border-white/10">
+            <img src="/icons/fan.jpg" className="w-6 h-6 animate-spin-slow" />
           </div>
           <div>
-            <h2 className="text-4xl font-heading font-bold text-cyan-100">Urahara</h2>
-            <p className="text-xs text-cyan-100/40 uppercase tracking-widest">12th Division</p>
+            <h2 className="text-4xl font-bold">urahara</h2>
+            <p className="text-xs text-zinc-500 uppercase tracking-widest">
+              12th division ex captain
+            </p>
           </div>
         </div>
 
         <ChatInterface />
       </section>
     </div>
-  );
-};
+  )
+}
 
-const CodeBlock: React.FC<{ code: string; language?: string }> = ({ code, language }) => {
-  const [copied, setCopied] = useState(false);
+const CodeBlock = ({ code, language }: { code: string; language?: string }) => {
+  const [copied, setCopied] = useState(false)
 
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const copy = async () => {
+    await navigator.clipboard.writeText(code)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
-    <div className="rounded-lg overflow-hidden border border-cyan-500/30 bg-[#0a0a0a] my-3 shadow-lg w-full">
-      <div className="flex justify-between items-center px-4 py-2 bg-cyan-950/30 border-b border-cyan-500/10">
-        <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold tracking-widest">
-          {language || 'CODE'}
+    <div className="rounded-lg overflow-hidden border border-white/10 bg-black my-3 w-full">
+      <div className="flex justify-between items-center px-4 py-2 bg-zinc-900/60">
+        <span className="text-[10px] uppercase text-zinc-400">
+          {language || 'code'}
         </span>
-        <button
-          onClick={handleCopy}
-          className="flex items-center gap-1.5 text-[10px] text-cyan-100/50 hover:text-cyan-100 transition-colors uppercase tracking-wider font-bold"
-        >
-          {copied ? (
-            <>
-              <Check size={12} className="text-green-400" />
-              <span className="text-green-400">Copied</span>
-            </>
-          ) : (
-            <>
-              <Copy size={12} />
-              <span>Copy</span>
-            </>
-          )}
+        <button onClick={copy} className="flex items-center gap-1 text-xs">
+          {copied ? <Check size={12} /> : <Copy size={12} />}
         </button>
       </div>
-      <div className="p-4 overflow-x-auto bg-black/40">
-        <pre className="text-sm font-mono text-cyan-50 leading-relaxed">
-          <code>{code.trim()}</code>
-        </pre>
-      </div>
+      <pre className="p-4 text-sm text-zinc-200 overflow-x-auto">
+        <code>{code.trim()}</code>
+      </pre>
     </div>
-  );
-};
+  )
+}
 
-const MessageContent: React.FC<{ text: string }> = ({ text }) => {
-  const parts: any[] = [];
-  let lastIndex = 0;
-  const regex = /```(\w+)?\s*([\s\S]*?)```/g;
-  let match;
+const MessageContent = ({ text }: { text: string }) => {
+  const parts: any[] = []
+  let last = 0
+  const r = /```(\w+)?\s*([\s\S]*?)```/g
+  let m
 
-  while ((match = regex.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      parts.push({ type: 'text', content: text.substring(lastIndex, match.index) });
-    }
-    parts.push({ type: 'code', language: match[1], content: match[2] });
-    lastIndex = regex.lastIndex;
+  while ((m = r.exec(text))) {
+    if (m.index > last) parts.push({ t: 'text', c: text.slice(last, m.index) })
+    parts.push({ t: 'code', l: m[1], c: m[2] })
+    last = r.lastIndex
   }
 
-  if (lastIndex < text.length) {
-    parts.push({ type: 'text', content: text.substring(lastIndex) });
-  }
+  if (last < text.length) parts.push({ t: 'text', c: text.slice(last) })
 
   return (
-    <div className="w-full min-w-0">
-      {parts.map((part, idx) =>
-        part.type === 'code' ? (
-          <CodeBlock key={idx} code={part.content} language={part.language} />
+    <>
+      {parts.map((p, i) =>
+        p.t === 'code' ? (
+          <CodeBlock key={i} code={p.c} language={p.l} />
         ) : (
-          <span key={idx} className="whitespace-pre-wrap break-words">
-            {part.content}
+          <span key={i} className="whitespace-pre-wrap break-words">
+            {p.c}
           </span>
         )
       )}
-    </div>
-  );
-};
+    </>
+  )
+}
 
-const ChatInterface: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: "What is your request today?" }
-  ]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const chatSessionRef = useRef<Chat | null>(null);
+const ChatInterface = () => {
+  const [m, s] = useState<Message[]>([
+    { role: 'model', text: 'my my a signal from inside the barrier how curious' }
+  ])
+  const [i, si] = useState('')
+  const [l, sl] = useState(false)
+  const r = useRef<HTMLDivElement>(null)
+  const c = useRef<Chat | null>(null)
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
+    r.current && (r.current.scrollTop = r.current.scrollHeight)
+  }, [m])
 
-  const getChatSession = () => {
-    if (!chatSessionRef.current) {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-      chatSessionRef.current = ai.chats.create({
+  const chat = () => {
+    if (!c.current) {
+      const a = new GoogleGenAI({ apiKey: process.env.API_KEY || '' })
+      c.current = a.chats.create({
         model: 'gemini-3-flash-preview',
-        config: { systemInstruction: " " }
-      });
+        config: {
+          systemInstruction:
+            'you are kisuke urahara playful mysterious genius concise lowercase code only when asked'
+        }
+      })
     }
-    return chatSessionRef.current;
-  };
+    return c.current
+  }
 
-  const handleSend = async (e?: React.FormEvent) => {
-    e?.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    const userMsg = input.trim();
-    setInput('');
-    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setIsLoading(true);
+  const send = async (e?: React.FormEvent) => {
+    e?.preventDefault()
+    if (!i.trim() || l) return
+    const u = i
+    si('')
+    s(v => [...v, { role: 'user', text: u }])
+    sl(true)
 
     try {
-      const chat = getChatSession();
-      const result = await chat.sendMessageStream({ message: userMsg });
+      const res = await chat().sendMessageStream({ message: u })
+      let f = ''
+      s(v => [...v, { role: 'model', text: '' }])
 
-      let fullResponse = "";
-      setMessages(prev => [...prev, { role: 'model', text: "" }]);
-
-      for await (const chunk of result) {
-        if (chunk.text) {
-          fullResponse += chunk.text;
-          setMessages(prev => {
-            const newHistory = [...prev];
-            newHistory[newHistory.length - 1].text = fullResponse;
-            return newHistory;
-          });
+      for await (const ch of res) {
+        if (ch.text) {
+          f += ch.text
+          s(v => {
+            const n = [...v]
+            n[n.length - 1].text = f
+            return n
+          })
         }
       }
     } finally {
-      setIsLoading(false);
+      sl(false)
     }
-  };
+  }
 
   return (
-    <div className="glass rounded-[2rem] border border-cyan-500/20 overflow-hidden flex flex-col h-[700px] shadow-2xl shadow-cyan-900/20 bg-slate-950/60">
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth">
-        {messages.map((msg, idx) => (
-          <div key={idx} className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-            <div
-              className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden ${
-                msg.role === 'model'
-                  ? 'bg-cyan-950/40 border border-cyan-500/20'
-                  : 'bg-white/5 border border-white/10'
-              }`}
-            >
+    <div className="rounded-3xl border border-white/10 bg-black/70 flex flex-col h-[700px]">
+      <div ref={r} className="flex-1 overflow-y-auto p-6 space-y-6">
+        {m.map((x, k) => (
+          <div key={k} className={`flex gap-4 ${x.role === 'user' && 'flex-row-reverse'}`}>
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 flex items-center justify-center">
               <img
-                src={msg.role === 'model' ? '/Urahara.png' : '/User.png'}
-                alt="avatar"
-                className="w-full h-full object-cover"
+                src={x.role === 'model' ? '/icons/bot.jpg' : '/icons/user.jpg'}
+                className="w-5 h-5 rounded-md"
               />
             </div>
-
-            <div className={`max-w-[85%] p-4 rounded-2xl leading-relaxed shadow-lg overflow-hidden ${
-              msg.role === 'user'
-                ? 'bg-cyan-100 text-cyan-950 font-medium'
-                : 'bg-slate-900/60 border border-cyan-500/20 text-cyan-100/90'
-            }`}>
-              {msg.text && <MessageContent text={msg.text} />}
+            <div className="max-w-[85%] p-4 rounded-2xl bg-zinc-900/70">
+              <MessageContent text={x.text} />
             </div>
           </div>
         ))}
       </div>
 
-      <form onSubmit={handleSend} className="p-4 border-t border-cyan-500/20 bg-slate-950/80 backdrop-blur-xl">
-        <div className="relative flex items-center gap-2">
+      <form onSubmit={send} className="p-4 border-t border-white/10">
+        <div className="relative flex items-center">
           <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter request"
-            className="w-full bg-cyan-900/10 border border-cyan-500/20 rounded-xl px-4 py-4 pr-12 text-cyan-100 placeholder-cyan-100/30"
+            value={i}
+            onChange={e => si(e.target.value)}
+            className="w-full bg-black border border-white/10 rounded-xl px-4 py-4 pr-12"
+            placeholder="enter spirit communication"
           />
-          <button
-            type="submit"
-            disabled={!input.trim() || isLoading}
-            className="absolute right-2 p-2 bg-cyan-600 text-white rounded-lg"
-          >
+          <button className="absolute right-2 p-2">
             <Send size={18} />
           </button>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-const VibeImage: React.FC<{ src: string; direction: 'left' | 'right' }> = ({ src }) => {
+const VibeImage = ({ src, direction }: { src: string; direction: 'left' | 'right' }) => {
+  const r = useRef<HTMLDivElement>(null)
+  const [v, sv] = useState(false)
+
+  useEffect(() => {
+    const o = new IntersectionObserver(([e]) => sv(e.isIntersecting), { threshold: 0.2 })
+    r.current && o.observe(r.current)
+    return () => o.disconnect()
+  }, [])
+
   return (
-    <div className="w-full max-w-4xl aspect-video rounded-[3rem] overflow-hidden">
-      <img src={src} className="w-full h-full object-cover grayscale hover:grayscale-0" />
+    <div
+      ref={r}
+      className={`w-full max-w-4xl aspect-video rounded-3xl overflow-hidden transition-all duration-1000 ${
+        v ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{
+        transform: v
+          ? 'translateX(0) scale(1)'
+          : `translateX(${direction === 'left' ? '-100px' : '100px'}) scale(0.95)`
+      }}
+    >
+      <img src={src} className="w-full h-full object-cover grayscale" />
     </div>
-  );
-};
+  )
+}
