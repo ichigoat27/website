@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Message } from '../types';
-import { Send, Fan, Copy, Check } from 'lucide-react';
+import { Send, Copy, Check } from 'lucide-react';
 import { GoogleGenAI, Chat } from "@google/genai";
 
 export const Home: React.FC = () => {
@@ -12,11 +12,13 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="px-6 space-y-32 pb-32 overflow-x-hidden bg-black text-neutral-200">
+    <div className="px-6 space-y-32 pb-32 overflow-x-hidden bg-gradient-to-b from-white via-neutral-200 to-black text-neutral-200">
       <section className="h-[80vh] flex flex-col justify-center items-center text-center max-w-5xl mx-auto">
         <h1 className="text-6xl md:text-8xl font-heading font-extrabold tracking-tighter leading-none mb-8 animate-in slide-in-from-bottom duration-1000 text-white">
           TEST PHASE <br />
-          <span className="text-white">TEST PHASE</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
+            TEST PHASE
+          </span>
         </h1>
         <p className="text-neutral-400 max-w-md animate-in fade-in duration-1000 delay-300 tracking-wide">
           "Welcome to the whatever this is."
@@ -33,8 +35,12 @@ export const Home: React.FC = () => {
 
       <section className="max-w-4xl mx-auto w-full pt-32">
         <div className="flex items-center gap-3 mb-8">
-          <div className="p-3 bg-black/40 rounded-xl border border-neutral-700">
-            <Fan className="text-neutral-400 animate-spin-slow" size={24} />
+          <div className="p-3 bg-black/40 rounded-xl border border-neutral-700 overflow-hidden">
+            <img
+              src="https://i.pinimg.com/736x/72/43/a8/7243a820937c0510004fa2fc0059c8c0.jpg"
+              alt="avatar"
+              className="w-6 h-6 object-cover"
+            />
           </div>
           <div>
             <h2 className="text-4xl font-heading font-bold text-white">Urahara</h2>
@@ -188,9 +194,7 @@ const ChatInterface: React.FC = () => {
           <div key={idx} className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
             <div className="w-10 h-10 rounded-xl overflow-hidden border border-neutral-700 bg-black">
               <img
-                src={msg.role === 'model'
-                  ? 'data:image/jpeg;base64,...'
-                  : 'data:image/jpeg;base64,...'}
+                src="https://i.pinimg.com/736x/72/43/a8/7243a820937c0510004fa2fc0059c8c0.jpg"
                 alt="avatar"
                 className="w-full h-full object-cover"
               />
