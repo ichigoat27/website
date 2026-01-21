@@ -7,7 +7,7 @@ import { GoogleGenAI, Chat } from "@google/genai";
 export const Home: React.FC = () => {
   // Mock abstract/vibe images with a cooler tone
   const scrollImages = [
-    'https://preview.redd.it/what-makes-ichigo-such-an-iconic-protagonist-v0-ahs1df7rv46e1.jpeg?auto=webp&s=dbf34ad0eb1b17610c5e93150c774b422eeb6e6e',
+    'https://i.redd.it/manga-volume-covers-v0-p4pvga7sqeza1.jpg?width=6376&format=pjpg&auto=webp&s=580d6104f600038a23fc1ff7ac6314b9d2bdac53',
     'https://www.dexerto.com/cdn-image/wp-content/uploads/2024/12/30/bleach-tybw-cover.jpg?width=1200&quality=60&format=auto',
     'https://fictionhorizon.com/wp-content/uploads/2023/03/IchigoMerged.jpg',
     'https://wallpapers-clan.com/wp-content/uploads/2024/02/bleach-ichigo-kurosaki-blue-desktop-wallpaper-cover.jpg'
@@ -238,7 +238,7 @@ const ChatInterface: React.FC = () => {
             type="text" 
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter spirit communication..."
+            placeholder="Enter request"
             className="w-full bg-cyan-900/10 border border-cyan-500/20 rounded-xl px-4 py-4 pr-12 focus:outline-none focus:border-cyan-500/50 focus:bg-cyan-950/30 transition-all text-cyan-100 placeholder-cyan-100/30"
           />
           <button 
