@@ -44,7 +44,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             this was made possible by nathan 🙏
           </div>
           <div className="flex gap-8 text-sm">
-            <a href="#" className="hover:text-zinc-100 transition-colors">bro</a>
+            <a href="https://drive.google.com/drive/folders/1nSb-4PAuBCMBNbfgmGKD1Z-B59WCN-B9?usp=sharing" className="hover:text-zinc-100 transition-colors">bro</a>
             <a href="#" className="hover:text-zinc-100 transition-colors">forgot</a>
             <a href="#" className="hover:text-zinc-100 transition-colors">this</a>
           </div>
