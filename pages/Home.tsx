@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Message } from '../types';
-import { Send, Copy, Check } from 'lucide-react';
+import { Send, Fan, Copy, Check } from 'lucide-react';
 import { GoogleGenAI, Chat } from "@google/genai";
 
 export const Home: React.FC = () => {
@@ -12,15 +12,13 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="px-6 space-y-32 pb-32 overflow-x-hidden bg-gradient-to-b from-white via-neutral-200 to-black text-neutral-200">
+    <div className="px-6 space-y-32 pb-32 overflow-x-hidden">
       <section className="h-[80vh] flex flex-col justify-center items-center text-center max-w-5xl mx-auto">
-        <h1 className="text-6xl md:text-8xl font-heading font-extrabold tracking-tighter leading-none mb-8 animate-in slide-in-from-bottom duration-1000 text-white">
-          TEST PHASE <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
-            TEST PHASE
-          </span>
+        <h1 className="text-6xl md:text-8xl font-heading font-extrabold tracking-tighter leading-none mb-8 animate-in slide-in-from-bottom duration-1000">
+          TEST PHASE <br /> 
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">TEST PHASE</span>
         </h1>
-        <p className="text-neutral-400 max-w-md animate-in fade-in duration-1000 delay-300 tracking-wide">
+        <p className="text-cyan-100/50 max-w-md animate-in fade-in duration-1000 delay-300 tracking-wide">
           "Welcome to the whatever this is."
         </p>
       </section>
@@ -35,18 +33,12 @@ export const Home: React.FC = () => {
 
       <section className="max-w-4xl mx-auto w-full pt-32">
         <div className="flex items-center gap-3 mb-8">
-          <div className="p-3 bg-black/40 rounded-xl border border-neutral-700 overflow-hidden">
-            <img
-              src="https://i.pinimg.com/736x/72/43/a8/7243a820937c0510004fa2fc0059c8c0.jpg"
-              alt="avatar"
-              className="w-6 h-6 object-cover"
-            />
+          <div className="p-3 bg-cyan-950/30 rounded-xl border border-cyan-500/20">
+            <Fan className="text-cyan-400 animate-spin-slow" size={24} />
           </div>
           <div>
-            <h2 className="text-4xl font-heading font-bold text-white">Urahara</h2>
-            <p className="text-xs text-neutral-400 uppercase tracking-widest">
-              12th Division
-            </p>
+            <h2 className="text-4xl font-heading font-bold text-cyan-100">Urahara</h2>
+            <p className="text-xs text-cyan-100/40 uppercase tracking-widest">12th Division</p>
           </div>
         </div>
 
@@ -66,19 +58,19 @@ const CodeBlock: React.FC<{ code: string; language?: string }> = ({ code, langua
   };
 
   return (
-    <div className="rounded-lg overflow-hidden border border-neutral-700 bg-black my-3 shadow-lg w-full">
-      <div className="flex justify-between items-center px-4 py-2 bg-black/60 border-b border-neutral-800">
-        <span className="text-[10px] font-mono uppercase text-neutral-400 font-bold tracking-widest">
+    <div className="rounded-lg overflow-hidden border border-cyan-500/30 bg-[#0a0a0a] my-3 shadow-lg w-full">
+      <div className="flex justify-between items-center px-4 py-2 bg-cyan-950/30 border-b border-cyan-500/10">
+        <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold tracking-widest">
           {language || 'CODE'}
         </span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-[10px] text-neutral-400 hover:text-white transition-colors uppercase tracking-wider font-bold"
+          className="flex items-center gap-1.5 text-[10px] text-cyan-100/50 hover:text-cyan-100 transition-colors uppercase tracking-wider font-bold"
         >
           {copied ? (
             <>
-              <Check size={12} className="text-white" />
-              <span className="text-white">Copied</span>
+              <Check size={12} className="text-green-400" />
+              <span className="text-green-400">Copied</span>
             </>
           ) : (
             <>
@@ -88,8 +80,8 @@ const CodeBlock: React.FC<{ code: string; language?: string }> = ({ code, langua
           )}
         </button>
       </div>
-      <div className="p-4 overflow-x-auto bg-black">
-        <pre className="text-sm font-mono text-neutral-200 leading-relaxed">
+      <div className="p-4 overflow-x-auto bg-black/40">
+        <pre className="text-sm font-mono text-cyan-50 leading-relaxed">
           <code>{code.trim()}</code>
         </pre>
       </div>
@@ -188,13 +180,19 @@ const ChatInterface: React.FC = () => {
   };
 
   return (
-    <div className="rounded-[2rem] border border-neutral-800 overflow-hidden flex flex-col h-[700px] shadow-2xl bg-black/80">
+    <div className="glass rounded-[2rem] border border-cyan-500/20 overflow-hidden flex flex-col h-[700px] shadow-2xl shadow-cyan-900/20 bg-slate-950/60">
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth">
         {messages.map((msg, idx) => (
           <div key={idx} className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-            <div className="w-10 h-10 rounded-xl overflow-hidden border border-neutral-700 bg-black">
+            <div
+              className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden ${
+                msg.role === 'model'
+                  ? 'bg-cyan-950/40 border border-cyan-500/20'
+                  : 'bg-white/5 border border-white/10'
+              }`}
+            >
               <img
-                src="https://i.pinimg.com/736x/72/43/a8/7243a820937c0510004fa2fc0059c8c0.jpg"
+                src={msg.role === 'model' ? '/Urahara.png' : '/User.png'}
                 alt="avatar"
                 className="w-full h-full object-cover"
               />
@@ -202,8 +200,8 @@ const ChatInterface: React.FC = () => {
 
             <div className={`max-w-[85%] p-4 rounded-2xl leading-relaxed shadow-lg overflow-hidden ${
               msg.role === 'user'
-                ? 'bg-neutral-200 text-black font-medium'
-                : 'bg-black/60 border border-neutral-800 text-neutral-200'
+                ? 'bg-cyan-100 text-cyan-950 font-medium'
+                : 'bg-slate-900/60 border border-cyan-500/20 text-cyan-100/90'
             }`}>
               {msg.text && <MessageContent text={msg.text} />}
             </div>
@@ -211,19 +209,19 @@ const ChatInterface: React.FC = () => {
         ))}
       </div>
 
-      <form onSubmit={handleSend} className="p-4 border-t border-neutral-800 bg-black/80">
+      <form onSubmit={handleSend} className="p-4 border-t border-cyan-500/20 bg-slate-950/80 backdrop-blur-xl">
         <div className="relative flex items-center gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Enter request"
-            className="w-full bg-black border border-neutral-700 rounded-xl px-4 py-4 pr-12 text-neutral-200 placeholder-neutral-500 focus:outline-none"
+            className="w-full bg-cyan-900/10 border border-cyan-500/20 rounded-xl px-4 py-4 pr-12 text-cyan-100 placeholder-cyan-100/30"
           />
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
-            className="absolute right-2 p-2 bg-neutral-700 text-white rounded-lg hover:bg-neutral-600 disabled:opacity-50"
+            className="absolute right-2 p-2 bg-cyan-600 text-white rounded-lg"
           >
             <Send size={18} />
           </button>
@@ -236,10 +234,7 @@ const ChatInterface: React.FC = () => {
 const VibeImage: React.FC<{ src: string; direction: 'left' | 'right' }> = ({ src }) => {
   return (
     <div className="w-full max-w-4xl aspect-video rounded-[3rem] overflow-hidden">
-      <img
-        src={src}
-        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-      />
+      <img src={src} className="w-full h-full object-cover grayscale hover:grayscale-0" />
     </div>
   );
 };
