@@ -7,10 +7,10 @@ import { GoogleGenAI, Chat } from "@google/genai";
 export const Home: React.FC = () => {
   // Mock abstract/vibe images with a cooler tone
   const scrollImages = [
-    'https://picsum.photos/seed/soul1/1200/800?grayscale',
-    'https://picsum.photos/seed/reishi2/1200/800?grayscale',
-    'https://picsum.photos/seed/seireitei3/1200/800?grayscale',
-    'https://picsum.photos/seed/void4/1200/800?grayscale'
+    'https://preview.redd.it/what-makes-ichigo-such-an-iconic-protagonist-v0-ahs1df7rv46e1.jpeg?auto=webp&s=dbf34ad0eb1b17610c5e93150c774b422eeb6e6e',
+    'https://www.dexerto.com/cdn-image/wp-content/uploads/2024/12/30/bleach-tybw-cover.jpg?width=1200&quality=60&format=auto',
+    'https://fictionhorizon.com/wp-content/uploads/2023/03/IchigoMerged.jpg',
+    'https://wallpapers-clan.com/wp-content/uploads/2024/02/bleach-ichigo-kurosaki-blue-desktop-wallpaper-cover.jpg'
   ];
 
   return (
@@ -18,11 +18,11 @@ export const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="h-[80vh] flex flex-col justify-center items-center text-center max-w-5xl mx-auto">
         <h1 className="text-6xl md:text-8xl font-heading font-extrabold tracking-tighter leading-none mb-8 animate-in slide-in-from-bottom duration-1000">
-          SPIRIT <br /> 
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">PARTICLES</span>
+          TEST PHASE <br /> 
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">TEST PHASE</span>
         </h1>
         <p className="text-cyan-100/50 max-w-md animate-in fade-in duration-1000 delay-300 tracking-wide">
-          "Welcome to the Seireitei Database. Authorized personnel only."
+          "Welcome to the Database."
         </p>
       </section>
 
@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
            </div>
            <div>
              <h2 className="text-4xl font-heading font-bold text-cyan-100">Urahara</h2>
-             <p className="text-xs text-cyan-100/40 uppercase tracking-widest">12th Division • Ex-Captain</p>
+             <p className="text-xs text-cyan-100/40 uppercase tracking-widest">12th Division</p>
            </div>
         </div>
         
@@ -132,7 +132,7 @@ const MessageContent: React.FC<{ text: string }> = ({ text }) => {
 
 const ChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: "Oh? A connection from inside the barrier? This is Kisuke Urahara speaking. How can I assist the Soul Reapers today?" }
+    { role: 'model', text: "What is your request today?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -152,7 +152,7 @@ const ChatInterface: React.FC = () => {
        chatSessionRef.current = ai.chats.create({
          model: 'gemini-3-flash-preview',
          config: {
-           systemInstruction: "You are Kisuke Urahara from Bleach. You are currently connected to the Soul Society network remotely. You are a genius scientist and former captain. Your tone is polite but playful, mysterious, and laid-back. You use phrases like 'My, my' or 'Isn't that scary'. Be helpful but maintain your character. Keep responses concise. talk in all lowercase unless needed, if code is asked just send the code and no explaination or crumbs, just pure code. You are a genius in Code too. also make every variable simple if possible by making it one",
+           systemInstruction: "You are Kisuke Urahara from Bleach. Be helpful but maintain your character. Keep responses concise. talk in all lowercase unless needed, if code is asked just send the code and no explaination or crumbs, just pure code. You are a genius in Code. also make every variable simple if possible by making it one",
          }
        });
     }
