@@ -177,7 +177,7 @@ const ChatInterface = () => {
             <div className="w-10 h-10 rounded-xl bg-zinc-900 flex items-center justify-center">
               <img
                 src={x.role === 'model' ? '/icons/ura.png' : '/icons/icon.png'}
-                className="w-5 h-5 rounded-md"
+                className="w-7 h-7 rounded-md"
               />
             </div>
             <div className="max-w-[85%] p-4 rounded-2xl bg-zinc-900/70">
