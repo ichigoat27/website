@@ -39,7 +39,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="font-heading font-bold tracking-tighter flex items-center gap-2">
             <img
               src="/icons/icon.png"
-              className="w-4 h-4 object-cover opacity-100"
+              className="w-7 h-7 object-cover opacity-100"
             />
             this was made possible by nathan 🙏
           </div>
